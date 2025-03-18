@@ -18,9 +18,7 @@ def recognize(request: HttpRequest):
         if not user_id or not picture:
             return HttpResponse(json.dumps({'error': 'Missing required fields'}), status=400)
         image = Picture(user_id, picture)
-        print("user reached here")
         result = utils.recognize(image)
-        print("after result")
         photo_id = utils.save_photo(image)
     except ValueError as e:
         print(e)

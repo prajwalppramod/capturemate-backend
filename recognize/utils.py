@@ -17,12 +17,11 @@ def get_friends_encodings_list(user_id: str):
 
 def get_people_in_image(image: Picture):
     friend_encodings, friend_ids = get_friends_encodings_list(image.user_id)
+
     return ml.recognize_faces(image.picture, friend_encodings, friend_ids)
 
 def recognize(image: Picture):
     friend_ids = get_people_in_image(image)
-    print("hello",friend_ids)
-
     return [get_friend(friend_id).to_client_json() for friend_id in friend_ids]
 
 def save_photo(image: Picture):

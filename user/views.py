@@ -130,6 +130,7 @@ def find_people(request: HttpRequest):
 @csrf_exempt
 def friends(request: HttpRequest):
     try:
+        print("hello")
         if request.method == 'POST':
             return add_or_remove_friend(request)
         elif request.method == 'GET':

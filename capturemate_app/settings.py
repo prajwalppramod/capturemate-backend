@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from pathlib import Path
 from database import StorageConnection
-
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -25,14 +24,41 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-5#4a+xqgkklzxa9$v0x$lnpkr@f7@muxx_ros$bjie6o6om477'
-
+APPEND_SLASH = True
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+ALLOWED_HOSTS = ['*']
+CORS_ALLOWED_ORIGINS = [
+    "https://0f1b-2406-7400-94-126b-8d27-c5b1-d878-cf0d.ngrok-free.app",
+    "https://4498-2406-7400-94-126b-8d27-c5b1-d878-cf0d.ngrok-free.app"
+]
+CSRF_TRUSTED_ORIGINS = [
+    "https://0f1b-2406-7400-94-126b-8d27-c5b1-d878-cf0d.ngrok-free.app",
+    "https://4498-2406-7400-94-126b-8d27-c5b1-d878-cf0d.ngrok-free.app"
+]
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '1584-2406-7400-51-f1d6-406d-a590-36ef-713f.ngrok-free.app',
-    'a8a2-2406-7400-51-f1d6-406d-a590-36ef-713f.ngrok-free.app'
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'Access-Control-Allow-Origin',
+    'ngrok-skip-browser-warning'
 ]
 
 
@@ -50,9 +76,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -60,7 +86,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'capturemate_app.urls'
 
@@ -138,12 +163,3 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
-
-TRUSTED_ORIGINS = [
-    'http://localhost:5173',
-    'https://a8a2-2406-7400-51-f1d6-406d-a590-36ef-713f.ngrok-free.app'
-]
-
-CORS_ALLOWED_ORIGINS = [
-    'https://a8a2-2406-7400-51-f1d6-406d-a590-36ef-713f.ngrok-free.app'
-]
